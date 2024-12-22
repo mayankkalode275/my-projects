@@ -1,0 +1,39 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const inputBox = document.getElementById('inputBox');
+    const buttons = document.querySelectorAll('button');
+    let currentInput = '';
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const buttonText = button.textContent.trim();
+            if (buttonText === 'AC') {
+                currentInput = '';
+                inputBox.value = '';
+            } 
+          
+            else if (buttonText === 'DEL') {
+                currentInput = currentInput.slice(0, -1);
+                inputBox.value = currentInput;
+            } 
+    
+            else if (buttonText === '=') {
+                try {
+                 
+                    currentInput = eval(currentInput);
+                    inputBox.value = currentInput;
+                } catch (error) {
+                    inputBox.value = 'Error';
+                    setTimeout(() => {
+                        inputBox.value = '';
+                        currentInput = '';
+                    }, 2000);
+                }
+            } 
+           
+            else {
+                currentInput += buttonText;
+                inputBox.value = currentInput;
+            }
+        });
+    });
+});
